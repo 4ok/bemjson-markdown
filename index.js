@@ -22,7 +22,7 @@ module.exports = function (rules) {
     var _getDefaltRules = function () {
 
         return require(
-            path.join(__dirname, 'rules.js')
+            path.join(__dirname, 'rules/default.js')
         )
     };
 
