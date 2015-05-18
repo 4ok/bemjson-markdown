@@ -4,7 +4,7 @@ var _    = require('lodash');
 module.exports = function (rules) {
 
     this.convert = function (bemjson, rules) {
-        var defaultRules  = _getDefaltRules();
+        var defaultRules  = _getDefaultRules();
 
         rules = (_.isPlainObject(rules))
             ? _.assign(defaultRules, rules)
@@ -19,7 +19,7 @@ module.exports = function (rules) {
         return result;
     };
 
-    var _getDefaltRules = function () {
+    var _getDefaultRules = function () {
 
         return require(
             path.join(__dirname, 'rules/default.js')
@@ -27,14 +27,13 @@ module.exports = function (rules) {
     };
 
     var _convert = function (bemjson, rules) {
-        var self = this;
         var result;
 
         if (_.isArray(bemjson)) {
             result = '';
 
             bemjson.forEach(function (item) {
-                result += self._convert(item, rules);
+                result += _convert(item, rules);
             });
         } else if (_.isPlainObject(bemjson)) {
 
@@ -63,7 +62,7 @@ module.exports = function (rules) {
                                         callback = params;
                                     }
 
-                                    bemjson.content = self._convert(bemjson.content, rules);
+                                    bemjson.content = _convert(bemjson.content, rules);
 
                                     result = callback(bemjson);
                                     noBreak = false;
@@ -73,7 +72,7 @@ module.exports = function (rules) {
                                     var matches = item.pattern.exec(key);
 
                                     if (matches) {
-                                        bemjson.content = self._convert(bemjson.content, rules);
+                                        bemjson.content = _convert(bemjson.content, rules);
 
                                         result = item.callback(bemjson, matches);
                                         noBreak = false;
