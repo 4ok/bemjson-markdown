@@ -1,29 +1,32 @@
 var path = require('path');
 var _    = require('lodash');
 
-module.exports = {
+module.exports = function (rules) {
 
-    convert: function (bemjson)
-    {
-        var rules  = this._getRules();
-        var result = this._convert(bemjson, rules);
+    this.convert = function (bemjson, rules) {
+        var defaultRules  = _getDefaltRules();
+
+        rules = (_.isPlainObject(rules))
+            ? _.assign(defaultRules, rules)
+            : defaultRules;
+
+        var result =_convert(bemjson, rules);
 
         if (_.isString(result)) {
             result = result.replace(/^\s+|\s+$/, '');
         }
 
         return result;
-    },
+    };
 
-    _getRules: function () {
+    var _getDefaltRules = function () {
 
         return require(
             path.join(__dirname, 'rules.js')
-        );
-    },
+        )
+    };
 
-    _convert: function (bemjson, rules)
-    {
+    var _convert = function (bemjson, rules) {
         var self = this;
         var result;
 
@@ -45,7 +48,7 @@ module.exports = {
 
                         if (sections[sectionAlias]) {
                             var itemsRules = sections[sectionAlias];
-                            var key        = bemjson[prop];
+                            var key = bemjson[prop];
 
                             if ('regexp' != sectionAlias) {
 
@@ -55,14 +58,14 @@ module.exports = {
 
                                     if ('block' == prop) {
                                         callback = params.callback;
-                                        rules    = params.rules;
+                                        rules = params.rules;
                                     } else {
                                         callback = params;
                                     }
 
                                     bemjson.content = self._convert(bemjson.content, rules);
 
-                                    result  = callback(bemjson);
+                                    result = callback(bemjson);
                                     noBreak = false;
                                 }
                             } else {
@@ -72,7 +75,7 @@ module.exports = {
                                     if (matches) {
                                         bemjson.content = self._convert(bemjson.content, rules);
 
-                                        result  = item.callback(bemjson, matches);
+                                        result = item.callback(bemjson, matches);
                                         noBreak = false;
                                     }
                                 });

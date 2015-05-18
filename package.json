@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/4ok/bemjson-markdown/issues"
   },
-  "homepage": "https://github.com/4ok/bemjson-markdown"
+  "homepage": "https://github.com/4ok/bemjson-markdown",
+  "dependencies": {
+    "lodash": "^3.8.0"
+  }
 }
