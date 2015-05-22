@@ -1,16 +1,36 @@
 var path = require('path');
 var _    = require('lodash');
 
-module.exports = function (rules) {
+module.exports = function (options) {
 
-    this.convert = function (bemjson, rules) {
-        var defaultRules  = _getDefaultRules();
+    if (!_.isPlainObject(options)) {
+        options = {};
+    }
 
-        rules = (_.isPlainObject(rules))
-            ? _.assign(defaultRules, rules)
-            : defaultRules;
+    var _getRules = function () {
 
-        var result =_convert(bemjson, rules);
+        return require(
+            path.join(__dirname, 'rules/default.js')
+        );
+    };
+
+    var _getMasks = function () {
+        var result = options.masks;
+
+        if (!result) {
+            result = require(
+                path.join(__dirname, '/masks/default.js')
+            );
+        }
+
+        return result;
+    };
+
+    var rules = _getRules();
+    var masks = _getMasks();
+
+    this.convert = function (bemjson) {
+        var result =_convert(bemjson);
 
         if (_.isString(result)) {
             result = result.replace(/^\s+|\s+$/, '');
@@ -19,78 +39,91 @@ module.exports = function (rules) {
         return result;
     };
 
-    var _getDefaultRules = function () {
-
-        return require(
-            path.join(__dirname, 'rules/default.js')
-        )
-    };
-
-    var _convert = function (bemjson, rules) {
+    var _convert = function (bemjson) {
         var result;
 
         if (_.isArray(bemjson)) {
             result = '';
 
             bemjson.forEach(function (item) {
-                result += _convert(item, rules);
+                result += _convert(item);
             });
-        } else if (_.isPlainObject(bemjson)) {
+        } else if (_.isPlainObject(bemjson)
+            && (bemjson.block || bemjson.elem)
+        ) {
 
-            _.every(rules, function (sections, prop) {
-                var sectionsAliases = ['strict', 'regexp']; // @todo to const
+            _.every(masks, function (mask, ruleName) {
+                var isMatched = _isMaskMatched(bemjson, mask);
 
-                return sectionsAliases.every(function (sectionAlias) {
-                    var noBreak = true;
+                if (isMatched) {
+                    result = _getRuleResult(ruleName, bemjson);
+                }
 
-                    if (bemjson.hasOwnProperty(prop)) {
-
-                        if (sections[sectionAlias]) {
-                            var itemsRules = sections[sectionAlias];
-                            var key = bemjson[prop];
-
-                            if ('regexp' != sectionAlias) {
-
-                                if (itemsRules.hasOwnProperty(key)) {
-                                    var params = itemsRules[key];
-                                    var callback;
-
-                                    if ('block' == prop) {
-                                        callback = params.callback;
-                                        rules = params.rules;
-                                    } else {
-                                        callback = params;
-                                    }
-
-                                    bemjson.content = _convert(bemjson.content, rules);
-
-                                    result = callback(bemjson);
-                                    noBreak = false;
-                                }
-                            } else {
-                                itemsRules.forEach(function (item) {
-                                    var matches = item.pattern.exec(key);
-
-                                    if (matches) {
-                                        bemjson.content = _convert(bemjson.content, rules);
-
-                                        result = item.callback(bemjson, matches);
-                                        noBreak = false;
-                                    }
-                                });
-                            }
-                        }
-                    }
-
-                    return noBreak;
-                });
+                return !isMatched;
             });
 
             if (undefined === result) {
-                result = "\n\n```javascript\n" + JSON.stringify(bemjson, null, 4) + "\n```";
+                result = '\n\n```javascript\n'
+                    + JSON.stringify(bemjson, null, 4)
+                    + '\n```';
             }
         } else {
             result = bemjson;
+        }
+
+        return result;
+    };
+
+    var _isMaskMatched = function (bemjson, mask) {
+        var bemjsonCopy = _.clone(bemjson);
+
+        if (mask.mods && bemjsonCopy.mods) {
+            bemjsonCopy.mods = _.pick(bemjsonCopy.mods, Object.keys(mask.mods));
+        }
+
+        if (mask.mix
+            && bemjsonCopy.mix
+            && _.isArray(bemjsonCopy.mix)
+            && _.some(bemjsonCopy.mix, mask.mix)
+        ) {
+            bemjsonCopy.mix = mask.mix;
+        }
+
+        bemjsonCopy = _.pick(
+            bemjsonCopy,
+            Object.keys(mask)
+        );
+
+        return _.isEqual(bemjsonCopy, mask);
+    };
+
+    var _getRuleResult = function (ruleName, bemjson) {
+        var result;
+
+        if (!rules[ruleName]) {
+            throw new Error(
+                'Incorrect Rule name "'
+                + ruleName
+                + '"'
+            );
+        } else {
+            var callback = rules[ruleName];
+
+            if (!_.isFunction(callback)) {
+                throw new Error(
+                    'Rule "'
+                    + ruleName
+                    + '" must be a function'
+                );
+            }
+
+            if (bemjson.content) {
+                var args = [bemjson.content];
+
+                bemjson.content = _convert.apply(this, args);
+            }
+
+            result = callback(bemjson);
         }
 
         return result;
