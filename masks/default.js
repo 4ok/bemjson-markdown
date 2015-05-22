@@ -10,10 +10,6 @@ module.exports = {
         elem : 'blockquote'
     },
 
-    //html : {
-    //    elem : 'p'
-    //},
-
     heading : {
         elem : 'header'
     },
