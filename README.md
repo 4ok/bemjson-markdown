@@ -1,8 +1,8 @@
 # bemjson-markdown
 
-Конвертирует данные из формата [bemjson](https://ru.bem.info/technology/bemjson/v2/bemjson/) в [markdown](https://ru.wikipedia.org/wiki/Markdown)
+> Конвертирует данные из формата [bemjson](https://ru.bem.info/technology/bemjson/v2/bemjson/) в [markdown](https://ru.wikipedia.org/wiki/Markdown)
 
-Для обратного преобразования (markdown в bemjson) используйте модуль [markdown-bemjson](https://www.npmjs.com/package/markdown-bemjson)
+Для обратного преобразования (markdown в bemjson) используйте модуль [markdown-bemjson](https://github.com/bem-incubator/markdown-bemjson)
 
 ## Зависимости
 
