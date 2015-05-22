@@ -2,6 +2,8 @@
 
 Конвертирует данные из формата [bemjson](https://ru.bem.info/technology/bemjson/v2/bemjson/) в [markdown](https://ru.wikipedia.org/wiki/Markdown)
 
+Для обратного преобразования (markdown в bemjson) используйте модуль [markdown-bemjson](https://www.npmjs.com/package/markdown-bemjson)
+
 ## Зависимости
 
 - [lodash](https://www.npmjs.com/package/lodash)
@@ -122,8 +124,6 @@ __Inline level__
 - del - _перечеркнутый текст_
 - link - _ссылка_
 - image - _изображение_
-
-__[Правила применяемые по умолчанию](rules/default.js)__
 
 ### convert(bemjson)
 
