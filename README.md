@@ -23,14 +23,6 @@ __git__
 ## Простой пример
 
 ```javascript
-var MarkdownBemjson = require('bemjson-markdown');
-var markdownBemjson = new MarkdownBemjson();
-
-var markdown = 'I am using __markdown__';
-var bemjson  = markdownBemjson.convert(markdown);
-
-console.log(bemjson);
-/*
 var BemjsonMarkdown = require('bemjson-markdown');
 var bemjsonMarkdown = new BemjsonMarkdown();
 
@@ -52,7 +44,7 @@ var bemjson = {
 var markdown = bemjsonMarkdown.convert(bemjson.content);
 
 console.log(markdown);
-*/
+// I am using **markdown**
 ```
 ## Документация
 
