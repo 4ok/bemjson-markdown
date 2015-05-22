@@ -30,12 +30,19 @@ var bemjson = {
     block: 'content',
     content : [
         {
+            elem : 'header',
+            mods : {
+                level : 3
+            },
+            content : 'Header level 3'
+        },
+        {
             elem:    'p',
             content: [
                 'I am using ',
                 {
-                    elem: 'strong',
-                    content: ['markdown']
+                    elem:    'strong',
+                    content: 'markdown'
                 }
             ]
         }
@@ -44,7 +51,11 @@ var bemjson = {
 var markdown = bemjsonMarkdown.convert(bemjson.content);
 
 console.log(markdown);
-// I am using **markdown**
+/*
+### Header level 3
+
+I am using **markdown**
+*/
 ```
 ## Документация
 
