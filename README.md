@@ -34,7 +34,7 @@ var bemjsonMarkdown = new BemjsonMarkdown();
 var bemjsonMarkdown = require('bemjson-markdown')();
 
 var bemjson = {
-    block: 'content',
+    block   : 'content',
     content : [
         {
             elem : 'header',
@@ -82,7 +82,7 @@ Type: `object`
 
 Коллекция масок.  
 
-#### Пример масок:
+#### Пример коллекции масок:
 
 ```javascript
 {
@@ -100,7 +100,48 @@ Type: `object`
 }
 ```
 
+#### Пример наложения маски
+
+**К примеру мы имеем часть bemjson следующего вида:**
+
+```javascript
+list : {
+    block : 'list',
+    mods  : {
+        block : 'content',
+        mods  : {
+            theme : 'theme-a'
+        },
+        mix : [
+            {
+               block : 'mix-block-a',
+            },
+            {
+                block : 'mix-block-b',
+                elem  : 'mix-elem-b'
+            }
+        ]
+    }
+}
+```
+
+**На нее легко накладывается следующая маска:**
+
+```javascript
+list : {
+    block : 'list',
+    mods  : {
+        block : 'content',
+        mix {
+            block : 'mix-block-b',
+            elem  : 'mix-elem-b'
+        }
+    }
+}
+```
+
 Если маска совпадает, то будет вызвано соответствующее преобразование в markdown.
+
 **Правило** по которому будет применено преобразование указано как ключ для маски, для примера выше это `paragraph` и `list`.
 
 Если ни одна из масок не совпала, то не распознанный bemjson будет обертнут как код javascript:
