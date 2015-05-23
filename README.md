@@ -25,8 +25,13 @@ __git__
 ## Простой пример
 
 ```javascript
+
+// Классический путь
 var BemjsonMarkdown = require('bemjson-markdown');
 var bemjsonMarkdown = new BemjsonMarkdown();
+
+// Тоже самое, но с сахаром
+var bemjsonMarkdown = require('bemjson-markdown')();
 
 var bemjson = {
     block: 'content',
@@ -39,12 +44,12 @@ var bemjson = {
             content : 'Header level 3'
         },
         {
-            elem:    'p',
-            content: [
+            elem     : 'p',
+            content  : [
                 'I am using ',
                 {
-                    elem:    'strong',
-                    content: 'markdown'
+                    elem    : 'strong',
+                    content : 'markdown'
                 }
             ]
         }
@@ -97,6 +102,19 @@ Type: `object`
 
 Если маска совпадает, то будет вызвано соответствующее преобразование в markdown.
 **Правило** по которому будет применено преобразование указано как ключ для маски, для примера выше это `paragraph` и `list`.
+
+Если ни одна из масок не совпала, то не распознанный bemjson будет обертнут как код javascript:
+
+<pre>
+<code>
+&#96;&#96;&#96;javascript
+{
+    block   : 'block',
+    content : 'content
+}
+&#96;&#96;&#96;
+</code>
+</pre>
 
 __[Маски применяемые по умолчанию](masks/default.js)__
 

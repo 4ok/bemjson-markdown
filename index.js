@@ -1,11 +1,7 @@
 var path = require('path');
 var _    = require('lodash');
 
-module.exports = function (options) {
-
-    if (!_.isPlainObject(options)) {
-        options = {};
-    }
+BemjsonMarkdown = function (options) {
 
     var _getRules = function () {
 
@@ -128,4 +124,24 @@ module.exports = function (options) {
 
         return result;
     }
+};
+
+module.exports = function (options) {
+    var result;
+
+    if (undefined === options) {
+        options = {};
+    }
+
+    if (!_.isPlainObject(options)) {
+        var error = 'Options must be plain object';
+
+        throw new Error(error);
+    }
+
+    if (!(this instanceof BemjsonMarkdown)) {
+        result = new BemjsonMarkdown(options);
+    }
+
+    return result;
 };
