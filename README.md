@@ -105,10 +105,10 @@ Type: `object`
 **К примеру мы имеем часть bemjson следующего вида:**
 
 ```javascript
-list : {
-    block : 'list',
+{
+    block : 'any-list',
     mods  : {
-        block : 'content',
+        block : 'any-block',
         mods  : {
             theme : 'theme-a'
         },
@@ -129,9 +129,9 @@ list : {
 
 ```javascript
 list : {
-    block : 'list',
+    block : 'any-list',
     mods  : {
-        block : 'content',
+        block : 'any-block',
         mix {
             block : 'mix-block-b',
             elem  : 'mix-elem-b'
