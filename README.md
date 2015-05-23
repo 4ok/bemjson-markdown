@@ -12,15 +12,15 @@
 
 __npm__
 
-`npm i bemjson-markdown --save`
-
-__bower__
-
-`bower install bemjson-markdown --save`
+```bash
+npm i bemjson-markdown --save
+```
 
 __git__
 
-`git clone https://github.com/4ok/bemjson-markdown.git`
+```bash
+git clone https://github.com/4ok/bemjson-markdown.git
+```
 
 ## Простой пример
 

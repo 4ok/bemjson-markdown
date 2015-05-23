@@ -134,7 +134,7 @@ module.exports = function (options) {
     }
 
     if (!_.isPlainObject(options)) {
-        var error = 'Options must be plain object';
+        var error = 'Options should be a simple object';
 
         throw new Error(error);
     }
