@@ -6,21 +6,13 @@
 
 ## Содержание
 
-- [Зависимости](#dependencies)
-- [Установка](#installation)
-- [Простой пример](#example)
-- [Документация](#manual)
-- [Авторы](#authors)
-- [Идеи, замечания и пожелания](#issues)
-- [Лицензия](#license)
-
-- <a href="#levels">Зависимости</a>
-- <a href="#levels">Установка</a>
-- <a href="#levels">Простой пример</a>
-- <a href="#levels">Документация</a>
-- <a href="#levels">Авторы</a>
-- <a href="#levels">Идеи, замечания и пожелания</a>
-- <a href="#levels">Лицензия</a>
+- <a href="#dependencies">Зависимости</a>
+- <a href="#installation">Установка</a>
+- <a href="#example">Простой пример</a>
+- <a href="#manual">Документация</a>
+- <a href="#authors">Авторы</a>
+- <a href="#issues">Идеи, замечания и пожелания</a>
+- <a href="#license">Лицензия</a>
 
 ### Дополнительная информация
 * [История изменений](/CHANGELOG.ru.md)
