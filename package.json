@@ -1,6 +1,6 @@
 {
   "name": "bemjson-markdown",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Bemjson to markdown converter",
   "main": "index.js",
   "scripts": {
@@ -11,10 +11,12 @@
     "url": "https://github.com/4ok/bemjson-markdown"
   },
   "keywords": [
-    "bem",
-    "converter",
+    "markdown",
     "bemjson",
-    "markdown"
+    "converter",
+    "bem",
+    "json"
+
   ],
   "author": "4ok",
   "license": "MIT",

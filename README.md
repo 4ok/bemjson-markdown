@@ -4,10 +4,33 @@
 
 Для обратного преобразования (markdown в bemjson) используйте модуль [markdown-bemjson](https://github.com/bem-incubator/markdown-bemjson)
 
+## Содержание
+
+- [Зависимости](#dependencies)
+- [Установка](#installation)
+- [Простой пример](#example)
+- [Документация](#manual)
+- [Авторы](#authors)
+- [Идеи, замечания и пожелания](#issues)
+- [Лицензия](#license)
+
+- <a href="#levels">Зависимости</a>
+- <a href="#levels">Установка</a>
+- <a href="#levels">Простой пример</a>
+- <a href="#levels">Документация</a>
+- <a href="#levels">Авторы</a>
+- <a href="#levels">Идеи, замечания и пожелания</a>
+- <a href="#levels">Лицензия</a>
+
+### Дополнительная информация
+* [История изменений](/CHANGELOG.ru.md)
+
+<a name="dependencies"></a>
 ## Зависимости
 
 - [lodash](https://www.npmjs.com/package/lodash)
 
+<a name="installation"></a>
 ## Установка
 
 __npm__
@@ -21,7 +44,7 @@ __git__
 ```bash
 git clone https://github.com/4ok/bemjson-markdown.git
 ```
-
+<a name="example"></a>
 ## Простой пример
 
 ```javascript
@@ -64,6 +87,8 @@ console.log(markdown);
 I am using **markdown**
 */
 ```
+
+<a name="manual"></a>
 ## Документация
 
 ### @contructor([options])
@@ -200,14 +225,17 @@ Type: `object`
 
 Bemjson
 
+<a name="authors"></a>
 ## Авторы
 
 - [4ok](https://github.com/4ok)
 
+<a name="issues"></a>
 ## Идеи, замечания и пожелания
 
 Все это можно оформить в виде [issues](https://github.com/bem-incubator/bemjson-markdown/issues) на GitHub.
 
+<a name="license"></a>
 ## Лицензия
 
 [MIT](http://en.wikipedia.org/wiki/MIT_License) Лицензия
