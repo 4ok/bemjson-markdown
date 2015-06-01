@@ -108,15 +108,15 @@ Type: `object`
 {
     block : 'block-a',
     mods  : {
-        'block-a' : 'block-name-a'
+        'block' : 'block-a'
     },
     mix : [
         {
-           'block-a' : 'block-name-b',
+           'block' : 'block-b',
         },
         {
-            'block-c' : 'block-name-c',
-            'elem-c'  : 'elem-name-c'
+            'block' : 'block-c',
+            'elem'  : 'elem-c'
         }
     ]
 }
@@ -129,7 +129,7 @@ Type: `object`
     block : 'block-a',
     mix : [
         {
-           'block-a' : 'block-name-b',
+           'block' : 'block-b',
         }
     ]
 }
@@ -139,11 +139,11 @@ Type: `object`
 {
     block : 'block-a',
     mods  : {
-        'block-a' : 'block-name-a'
+        'block' : 'block-a'
     },
     mix : {
-        'block-c' : 'block-name-c',
-        'elem-c'  : 'elem-name-c'
+        'block' : 'block-c',
+        'elem'  : 'elem-c'
     }
 }
 ```
