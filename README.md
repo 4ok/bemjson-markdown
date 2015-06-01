@@ -106,36 +106,44 @@ Type: `object`
 
 ```javascript
 {
-    block : 'any-list',
+    block : 'block-a',
     mods  : {
-        block : 'any-block',
-        mods  : {
-            theme : 'theme-a'
+        'block-a' : 'block-name-a'
+    },
+    mix : [
+        {
+           'block-a' : 'block-name-b',
         },
-        mix : [
-            {
-               block : 'mix-block-a',
-            },
-            {
-                block : 'mix-block-b',
-                elem  : 'mix-elem-b'
-            }
-        ]
-    }
+        {
+            'block-c' : 'block-name-c',
+            'elem-c'  : 'elem-name-c'
+        }
+    ]
 }
 ```
 
-**На нее легко накладывается следующая маска:**
+**На него накладываются следующие маски:**
 
 ```javascript
-list : {
-    block : 'any-list',
-    mods  : {
-        block : 'any-block',
-        mix {
-            block : 'mix-block-b',
-            elem  : 'mix-elem-b'
+{
+    block : 'block-a',
+    mix : [
+        {
+           'block-a' : 'block-name-b',
         }
+    ]
+}
+```
+
+```javascript
+{
+    block : 'block-a',
+    mods  : {
+        'block-a' : 'block-name-a'
+    },
+    mix : {
+        'block-c' : 'block-name-c',
+        'elem-c'  : 'elem-name-c'
     }
 }
 ```
