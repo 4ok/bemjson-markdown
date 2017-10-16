@@ -1,19 +1,20 @@
-var path = require('path');
-var _    = require('lodash');
+const path = require('path');
+const _    = require('lodash');
 
-BemjsonMarkdown = function (options) {
+const BemjsonMarkdown = options => {
 
-    var _getRules = function () {
-
+    const getRules = () => {
+        // eslint-disable-next-line import/no-dynamic-require
         return require(
             path.join(__dirname, 'rules/default.js')
         );
     };
 
-    var _getMasks = function () {
-        var result = options.masks;
+    const getMasks = () => {
+        let result = options.masks;
 
         if (!result) {
+            // eslint-disable-next-line import/no-dynamic-require
             result = require(
                 path.join(__dirname, '/masks/default.js')
             );
@@ -22,11 +23,11 @@ BemjsonMarkdown = function (options) {
         return result;
     };
 
-    var rules = _getRules();
-    var masks = _getMasks();
+    const rules = getRules();
+    const masks = getMasks();
 
-    this.convert = function (bemjson) {
-        var result =_convert(bemjson);
+    this.convert = bemjson => {
+        let result =convert(bemjson);
 
         if (_.isString(result)) {
             result = result.replace(/^\s+|\s+$/, '');
@@ -35,30 +36,30 @@ BemjsonMarkdown = function (options) {
         return result;
     };
 
-    var _convert = function (bemjson) {
-        var result;
+    const convert = bemjson => {
+        let result;
 
         if (_.isArray(bemjson)) {
             result = '';
 
-            bemjson.forEach(function (item) {
-                result += _convert(item);
+            bemjson.forEach(item => {
+                result += convert(item);
             });
         } else if (_.isPlainObject(bemjson)
             && (bemjson.block || bemjson.elem)
         ) {
 
-            _.every(masks, function (mask, ruleName) {
-                var isMatched = _isMaskMatched(bemjson, mask);
+            _.every(masks, (mask, ruleName) => {
+                const isMatched = isMaskMatched(bemjson, mask);
 
                 if (isMatched) {
-                    result = _getRuleResult(ruleName, bemjson);
+                    result = getRuleResult(ruleName, bemjson);
                 }
 
                 return !isMatched;
             });
 
-            if (undefined === result) {
+            if (result === undefined) {
                 result = '\n\n```javascript\n'
                     + JSON.stringify(bemjson, null, 4)
                     + '\n```';
@@ -70,8 +71,8 @@ BemjsonMarkdown = function (options) {
         return result;
     };
 
-    var _isMaskMatched = function (bemjson, mask) {
-        var bemjsonCopy = _.clone(bemjson);
+    const isMaskMatched = (bemjson, mask) => {
+        let bemjsonCopy = _.clone(bemjson);
 
         if (mask.mods && bemjsonCopy.mods) {
             bemjsonCopy.mods = _.pick(bemjsonCopy.mods, Object.keys(mask.mods));
@@ -93,8 +94,8 @@ BemjsonMarkdown = function (options) {
         return _.isEqual(bemjsonCopy, mask);
     };
 
-    var _getRuleResult = function (ruleName, bemjson) {
-        var result;
+    const getRuleResult = (ruleName, bemjson) => {
+        let result;
 
         if (!rules[ruleName]) {
             throw new Error(
@@ -103,7 +104,7 @@ BemjsonMarkdown = function (options) {
                 + '"'
             );
         } else {
-            var callback = rules[ruleName];
+            const callback = rules[ruleName];
 
             if (!_.isFunction(callback)) {
                 throw new Error(
@@ -114,9 +115,9 @@ BemjsonMarkdown = function (options) {
             }
 
             if (bemjson.content) {
-                var args = [bemjson.content];
+                const args = [bemjson.content];
 
-                bemjson.content = _convert.apply(this, args);
+                bemjson.content = convert.apply(this, args);
             }
 
             result = callback(bemjson);
@@ -127,14 +128,14 @@ BemjsonMarkdown = function (options) {
 };
 
 module.exports = function (options) {
-    var result;
+    let result;
 
-    if (undefined === options) {
+    if (options === undefined) {
         options = {};
     }
 
     if (!_.isPlainObject(options)) {
-        var error = 'Options should be a simple object';
+        const error = 'Options should be a simple object';
 
         throw new Error(error);
     }

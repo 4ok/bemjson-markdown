@@ -1,6 +1,6 @@
 {
   "name": "bemjson-markdown",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Bemjson to markdown converter",
   "main": "index.js",
   "repository": {
@@ -21,13 +21,14 @@
   },
   "homepage": "https://github.com/bem-contrib/bemjson-markdown",
   "scripts": {
-    "test": "node_modules/.bin/eslint ."
+    "lint": "node_modules/.bin/eslint ."
   },
   "dependencies": {
     "lodash": "^4.13.1"
   },
   "devDependencies": {
-    "eslint": "^3.0.1",
-    "eslint-config-4ok": "git://github.com/4ok/eslint-config-4ok"
+    "eslint": "^4.9.0",
+    "eslint-config-4ok": "github:4ok/eslint-config-4ok",
+    "eslint-plugin-import": "^2.7.0"
   }
 }
