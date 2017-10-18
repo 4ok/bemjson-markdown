@@ -4,7 +4,7 @@ const _    = require('lodash');
 const BemjsonMarkdown = options => {
 
     const getRules = () => {
-        // eslint-disable-next-line import/no-dynamic-require
+        // eslint-disable-next-line global-require, import/no-dynamic-require
         return require(
             path.join(__dirname, 'rules/default.js')
         );
@@ -14,7 +14,7 @@ const BemjsonMarkdown = options => {
         let result = options.masks;
 
         if (!result) {
-            // eslint-disable-next-line import/no-dynamic-require
+            // eslint-disable-next-line global-require, import/no-dynamic-require
             result = require(
                 path.join(__dirname, '/masks/default.js')
             );
