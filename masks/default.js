@@ -2,81 +2,81 @@ module.exports = {
 
     // Block level
 
-    code : {
-        elem : 'code'
+    code: {
+        elem: 'code',
     },
 
-    blockquote : {
-        elem : 'blockquote'
+    blockquote: {
+        elem: 'blockquote',
     },
 
-    heading : {
-        elem : 'header'
+    heading: {
+        elem: 'header',
     },
 
-    hr : {
-        elem : 'hr'
+    hr: {
+        elem: 'hr',
     },
 
-    list : {
-        elem : 'list'
+    list: {
+        elem: 'list',
     },
 
-    listitem : {
-        elem : 'list-item'
+    listitem: {
+        elem: 'list-item',
     },
 
-    paragraph : {
-        elem : 'p'
+    paragraph: {
+        elem: 'p',
     },
 
-    table : {
-        elem : 'table'
+    table: {
+        elem: 'table',
     },
 
-    tableheader : {
-        elem : 'table-header'
+    tableheader: {
+        elem: 'table-header',
     },
 
-    tablebody : {
-        elem : 'table-body'
+    tablebody: {
+        elem: 'table-body',
     },
 
-    tablerow : {
-        elem : 'table-row'
+    tablerow: {
+        elem: 'table-row',
     },
 
-    tablecell : {
-        elem : 'table-cell'
+    tablecell: {
+        elem: 'table-cell',
     },
 
     // Inline level
 
-    strong : {
-        elem : 'strong'
+    strong: {
+        elem: 'strong',
     },
 
-    em : {
-        elem : 'em'
+    em: {
+        elem: 'em',
     },
 
-    codespan : {
-        elem : 'codespan'
+    codespan: {
+        elem: 'codespan',
     },
 
-    br : {
-        elem : 'br'
+    br: {
+        elem: 'br',
     },
 
-    del : {
-        elem : 'del'
+    del: {
+        elem: 'del',
     },
 
-    link : {
-        elem : 'link'
+    link: {
+        elem: 'link',
     },
 
-    image : {
-        elem : 'image'
-    }
+    image: {
+        elem: 'image',
+    },
 };

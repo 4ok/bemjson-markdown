@@ -1,17 +1,17 @@
 const _ = require('lodash');
 
-const CODE_BLOCK          = '```';
+const CODE_BLOCK = '```';
 const TABLE_SEPARATOR_COL = '|';
-const TABLE_UNDER_HEADER  = '-';
-const STRONG              = '**';
-const EMPHASIS            = '*';
-const BLOCKQUOTE          = '> ';
-const HEADER              = '#';
-const HORIZONTAL_LINE     = '* * *';
-const LIST_ITEM           = '- ';
-const CODE                = '`';
-const BREAK_LINE          = '   ';
-const STRIKETHROUGH       = '~~';
+const TABLE_UNDER_HEADER = '-';
+const STRONG = '**';
+const EMPHASIS = '*';
+const BLOCKQUOTE = '> ';
+const HEADER = '#';
+const HORIZONTAL_LINE = '* * *';
+const LIST_ITEM = '- ';
+const CODE = '`';
+const BREAK_LINE = '   ';
+const STRIKETHROUGH = '~~';
 
 const NEW_LINE = '\n';
 
@@ -19,7 +19,7 @@ const getContent = bemjson => bemjson.content || '';
 
 const getBreak = (num = 1) => _.repeat(NEW_LINE, num);
 
-const getFormattedTable = content => {
+const getFormattedTable = (content) => {
     content = content.replace(/^\s+|\s+$/, '');
 
     const rows = content.split(getBreak());
@@ -37,9 +37,9 @@ const getFormattedTable = content => {
         });
     });
 
-    const result = table.map(row => {
+    const result = table.map((row) => {
 
-        const rows = row.map((cell, numCell) => {
+        const cells = row.map((cell, numCell) => {
             const colLength = colsLength[numCell];
             const regex = new RegExp('^\\' + TABLE_UNDER_HEADER + '+$');
             let rowResult = '';
@@ -56,13 +56,11 @@ const getFormattedTable = content => {
         });
 
         return TABLE_SEPARATOR_COL
-            + rows.join(TABLE_SEPARATOR_COL)
+            + cells.join(TABLE_SEPARATOR_COL)
             + TABLE_SEPARATOR_COL;
     });
 
-    return result.join(
-        getBreak()
-    );
+    return result.join(getBreak());
 };
 
 module.exports = { // @todo \n methods
@@ -70,11 +68,9 @@ module.exports = { // @todo \n methods
     // Block level
 
     code(bemjson) {
-        let lang = '';
-
-        if (bemjson.mods && bemjson.mods.lang) {
-            lang = bemjson.mods.lang;
-        }
+        const lang = (bemjson.mods && bemjson.mods.lang)
+            ? bemjson.mods.v
+            : '';
 
         return getBreak(2)
             + CODE_BLOCK
@@ -119,17 +115,13 @@ module.exports = { // @todo \n methods
     },
 
     table(bemjson) {
-        let content = bemjson.content;
-
-        content = getFormattedTable(content);
-
-        return getBreak(2) + content;
+        return getBreak(2) + getFormattedTable(bemjson.content);
     },
 
     tableheader(bemjson) {
         const content = bemjson.content.replace(/^\s+|\s+$/, '');
         const matches = content.split(TABLE_SEPARATOR_COL);
-        const row = matches.map(content => _.repeat(TABLE_UNDER_HEADER, content.length));
+        const row = matches.map(match => _.repeat(TABLE_UNDER_HEADER, match.length));
 
         return getBreak()
             + content
@@ -212,9 +204,9 @@ module.exports = { // @todo \n methods
         }
 
         // todo
-        //var size;
+        // var size;
         //
-        //if (bemjson.width) {
+        // if (bemjson.width) {
         //    size = bemjson.width + 'x';
         //
         //    if (bemjson.height) {
@@ -222,10 +214,10 @@ module.exports = { // @todo \n methods
         //    }
         //
         //    result += ' =' + size;
-        //}
+        // }
 
         result += ')';
 
         return result;
-    }
+    },
 };
